@@ -95,7 +95,7 @@ mandatory.</p></span>
     <pre class="prettyprint source lang-js"><code>// Add color layer with WFS source
 // Create the source
 const wfsSource = new itowns.WFSSource({
-    url: 'http://wxs.fr/wfs',
+    url: 'https://data.geopf.fr/wfs/ows?',
     version: '2.0.0',
     typeName: 'BDTOPO_BDD_WLD_WGS84G:bati_remarquable',
     crs: 'EPSG:4326',
@@ -127,7 +127,7 @@ view.addLayer(colorlayer);</code></pre>
     <pre class="prettyprint source lang-js"><code>// Add geometry layer with WFS source
 // Create the source
 const wfsSource = new itowns.WFSSource({
-    url: 'http://wxs.fr/wfs',
+    url: 'https://data.geopf.fr/wfs/ows?',
     version: '2.0.0',
     typeName: 'BDTOPO_BDD_WLD_WGS84G:bati_remarquable',
     crs: 'EPSG:4326',
@@ -142,11 +142,17 @@ const wfsSource = new itowns.WFSSource({
 });
 
 // Create the layer
-const geometryLayer = new itowns.GeometryLayer('mesh_build', {
-    update: itowns.FeatureProcessing.update,
-    convert: itowns.Feature2Mesh.convert({ extrude: () => 50 }),
+const geometryLayer = new itowns.FeatureGeometryLayer('mesh_build', {
+    style: {
+        fill: {
+            color: new itowns.THREE.Color(0xffcc00),
+            base_altitude: (p) => p.altitude,
+            extrusion_height: (p) => p.height,
+        }
+    },
     source: wfsSource,
-});
+    zoom: { min: 14 },
+};
 
 // Add the layer
 view.addLayer(geometryLayer);</code></pre>
@@ -261,6 +267,23 @@ is 0.</p>
         <div class="description">
             <p>The maximum level of the source. Default value
 is 21.</p>
+        </div>
+    
+</div>
+
+            <hr/>
+        
+            
+
+<div class="property">
+    <h3>
+        <span class="property-name">bboxDigits</span>
+        : <span class="type">string</span>
+    </h3>
+
+    
+        <div class="description">
+            <p>The bbox digits precision used in URL</p>
         </div>
     
 </div>
@@ -622,8 +645,8 @@ resources inside the extent.</p>
 
         <hr class="title-divider"/>
         <h2>Source</h2>
-        <a target="_blank" href="https://github.com/itowns/itowns/blob/master/src/Source/WFSSource.js">
-            src/Source/WFSSource.js
+        <a target="_blank" href="https://github.com/itowns/itowns/blob/master/packages/Main/src/Source/WFSSource.js">
+            packages/Main/src/Source/WFSSource.js
         </a>
 
 

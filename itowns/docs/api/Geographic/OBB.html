@@ -364,51 +364,14 @@ The OBB resulted can be only in the system 'EPSG:3946'.</p>
 
 <div class="method">
     <h3>
-        <span class="method-name">update</span>
-        (
-
-
-)
-        
-    </h3>
-
-    
-        
-            <div class="description">
-                <p>Update the top point world</p>
-            </div>
-        
-    
-
-    
-
-    
-
-    
-        
-    
-</div>
-
-            <hr/>
-        
-            
-
-<div class="method">
-    <h3>
         <span class="method-name">updateZ</span>
         (
 
 
     
     
-        min:
-            <span class="type">number</span>, 
-    
-        max:
-            <span class="type">number</span>, 
-    
-        scale:
-            <span class="type">number</span>
+        elevation:
+            <span class="type">Object</span>
     
 
 )
@@ -418,7 +381,7 @@ The OBB resulted can be only in the system 'EPSG:3946'.</p>
     
         
             <div class="description">
-                <p>Update z min and z max of oriented bounding box</p>
+                <p>Update z min, z max and z scale of oriented bounding box</p>
             </div>
         
     
@@ -432,8 +395,19 @@ The OBB resulted can be only in the system 'EPSG:3946'.</p>
 <ul class="params">
     
     <li>
-        <code>min</code>
+        <code>elevation</code>
+        (default: <code>{}</code>)
         
+        
+
+        
+            
+
+<ul class="params">
+    
+    <li>
+        <code>elevation.min</code>
+        (optional)
         
             &mdash; <span><p>The minimum of oriented bounding box</p></span>
         
@@ -442,8 +416,8 @@ The OBB resulted can be only in the system 'EPSG:3946'.</p>
     </li>
     
     <li>
-        <code>max</code>
-        
+        <code>elevation.max</code>
+        (optional)
         
             &mdash; <span><p>The maximum of oriented bounding box</p></span>
         
@@ -452,9 +426,26 @@ The OBB resulted can be only in the system 'EPSG:3946'.</p>
     </li>
     
     <li>
-        <code>scale</code>
+        <code>elevation.scale</code>
+        (optional)
         
+            &mdash; <span><p>The scale of oriented bounding box Z axis</p></span>
         
+
+        
+    </li>
+    
+    <li>
+        <code>elevation.geoidHeight</code>
+        (optional)
+        
+            &mdash; <span><p>The geoid height added to ellipsoid.</p></span>
+        
+
+        
+    </li>
+    
+</ul>
 
         
     </li>
@@ -482,8 +473,8 @@ The OBB resulted can be only in the system 'EPSG:3946'.</p>
 
         <hr class="title-divider"/>
         <h2>Source</h2>
-        <a target="_blank" href="https://github.com/itowns/itowns/blob/master/src/Renderer/OBB.js">
-            src/Renderer/OBB.js
+        <a target="_blank" href="https://github.com/itowns/itowns/blob/master/packages/Main/src/Renderer/OBB.js">
+            packages/Main/src/Renderer/OBB.js
         </a>
 
 

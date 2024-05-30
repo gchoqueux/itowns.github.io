@@ -15,8 +15,8 @@
         <div id="viewerDiv"></div>
         <div id="debug" width="400" height="300"></div>
         <script src="js/GUI/GuiTools.js"></script>
-        <script src="../dist/itowns.js"></script>
-        <script src="../dist/debug.js"></script>
+        <script src="../packages/Main/dist/itowns.js"></script>
+        <script src="../packages/Main/dist/debug.js"></script>
         <script src="js/GUI/LoadingScreen.js"></script>
         <script>
             // # Planar view with one single layer of vector tile
@@ -48,14 +48,14 @@
 
             // Defines a VectorTilesSource to load Vector Tiles data from the geoportail
             var mvtSource = new itowns.VectorTilesSource({
-                style: 'https://wxs.ign.fr/essentiels/static/vectorTiles/styles/PLAN.IGN/standard.json',
+                style: "https://data.geopf.fr/annexes/ressources/vectorTiles/styles/PLAN.IGN/standard.json",
                 // We don't display mountains related data to ease visualisation
                 filter: (layer) => !layer['source-layer'].includes('oro_') && !layer['source-layer'].includes('parcellaire'),
             });
 
             var mvtLayer = new itowns.ColorLayer('MVT', {
                 source: mvtSource,
-                addLabelLayer: true,
+                addLabelLayer: { performance: true },
             });
 
             view.addLayer(mvtLayer).then(menuGlobe.addLayerGUI.bind(menuGlobe));

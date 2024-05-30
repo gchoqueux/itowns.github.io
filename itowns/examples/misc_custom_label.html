@@ -34,8 +34,8 @@
 <div id="viewerDiv" class="viewer"></div>
 
 <script src="js/GUI/GuiTools.js"></script>
-<script src="../dist/itowns.js"></script>
-<script src="../dist/debug.js"></script>
+<script src="../packages/Main/dist/itowns.js"></script>
+<script src="../packages/Main/dist/debug.js"></script>
 <script src="js/GUI/LoadingScreen.js"></script>
 <script src="js/plugins/FeatureToolTip.js"></script>
 <script type="text/javascript">
@@ -57,8 +57,8 @@
         config.source = new itowns.WMTSSource(config.source);
         view.addLayer(new itowns.ElevationLayer(config.id, config));
     }
-    itowns.Fetcher.json('./layers/JSONLayers/WORLD_DTM.json').then(addElevationLayerFromConfig);
     itowns.Fetcher.json('./layers/JSONLayers/IGN_MNT_HIGHRES.json').then(addElevationLayerFromConfig);
+    itowns.Fetcher.json('./layers/JSONLayers/WORLD_DTM.json').then(addElevationLayerFromConfig);
     debug.createTileDebugUI(menuGlobe.gui, view);
 
     // Create a custom div which will be displayed as a label
@@ -109,9 +109,9 @@
         const layer = new itowns.LabelLayer('idLabelLayer', {
             source: source,
             domElement: setLabelContent,
-            style: new itowns.Style({
+            style: {
                 text: { anchor: [-0.8, -1] },
-            }),
+            },
         });
 
         view.addLayer(layer);
@@ -132,7 +132,7 @@
         // add geometries to feature
         const geometry = feature.bindNewGeometry();
         geometry.startSubGeometry(1, feature);
-        geometry.pushCoordinates(coordinate, feature);
+        geometry.pushCoordinates(feature, coordinate);
         geometry.properties.position = coordinate;
 
         geometry.updateExtent();

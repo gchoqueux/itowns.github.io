@@ -1,6 +1,9 @@
 {
 	"id":         "IGN_MNT_HIGHRES",
 	"noDataValue" : -99999,
+	"clampValues": {
+        "min": 0
+    },
 	"updateStrategy": {
 		"type": 1,
 		"options": {
@@ -8,7 +11,7 @@
 		}
 	},
 	"source": {
-		"url":        "https://wxs.ign.fr/altimetrie/geoportail/wmts",
+		"url": "https://data.geopf.fr/wmts?",
         "crs": "EPSG:4326",
 		"format": "image/x-bil;bits=32",
 		"attribution" : {

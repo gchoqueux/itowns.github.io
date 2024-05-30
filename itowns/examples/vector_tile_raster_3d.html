@@ -14,9 +14,9 @@
         <div id="viewerDiv"></div>
         <div id="debug" width="400" height="300"></div>
         <script src="js/GUI/GuiTools.js"></script>
-        <script src="../dist/itowns.js"></script>
+        <script src="../packages/Main/dist/itowns.js"></script>
         <script src="js/GUI/LoadingScreen.js"></script>
-        <script src="../dist/debug.js"></script>
+        <script src="../packages/Main/dist/debug.js"></script>
         <script>
             // # Simple Globe viewer + a vector tile layer
 
@@ -47,14 +47,9 @@
                 return view.addLayer(layer);
             }));
 
-            // Add a vector tile layer
-            function inter(z) {
-                return z - (z % 5);
-            }
-
             // Define a VectorTilesSource to load Vector Tiles data from the geoportail
             var mvtSource = new itowns.VectorTilesSource({
-                style: 'https://wxs.ign.fr/essentiels/static/vectorTiles/styles/PLAN.IGN/standard.json',
+                style: "https://data.geopf.fr/annexes/ressources/vectorTiles/styles/PLAN.IGN/standard.json",
                 // We don't display mountains related data to ease visualisation
                 filter: (layer) => !layer['source-layer'].includes('oro_') && !layer['source-layer'].includes('parcellaire'),
             });
@@ -63,7 +58,7 @@
                 source: mvtSource,
                 effect_type: itowns.colorLayerEffects.removeLightColor,
                 effect_parameter: 2.5,
-                addLabelLayer: true,
+                addLabelLayer: { performance: true },
             });
 
             view.addLayer(mvtLayer);

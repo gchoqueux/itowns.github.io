@@ -94,7 +94,20 @@ a THREE.Group.</p>
         <code>options.batchId</code>
         (optional)
         
-            &mdash; <span><p>optional function to create batchId attribute. It is passed the feature property and the feature index. As the batchId is using an unsigned int structure on 32 bits, the batchId could be between 0 and 4,294,967,295.</p></span>
+            &mdash; <span><p>optional function to create batchId attribute.
+It is passed the feature property and the feature index. As the batchId is using an unsigned int structure on 32 bits,
+the batchId could be between 0 and 4,294,967,295.</p></span>
+        
+
+        
+    </li>
+    
+    <li>
+        <code>options.style</code>
+        (optional)
+        
+            &mdash; <span><p>optional style properties. Only needed if the convert is used without instancing
+a layer beforehand.</p></span>
         
 
         
@@ -164,8 +177,8 @@ a THREE.Group.</p>
 
         <hr class="title-divider"/>
         <h2>Source</h2>
-        <a target="_blank" href="https://github.com/itowns/itowns/blob/master/src/Converter/Feature2Mesh.js">
-            src/Converter/Feature2Mesh.js
+        <a target="_blank" href="https://github.com/itowns/itowns/blob/master/packages/Main/src/Converter/Feature2Mesh.js">
+            packages/Main/src/Converter/Feature2Mesh.js
         </a>
 
 

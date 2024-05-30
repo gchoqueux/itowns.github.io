@@ -42,93 +42,6 @@
 
 <div class="method">
     <h3>
-        <span class="method-name">enableDracoLoader</span>
-        (
-
-
-    
-    
-        path:
-            <span class="type">string</span>, 
-    
-        config:
-            <span class="type">object</span>
-    
-
-)
-        
-    </h3>
-
-    
-        
-            <div class="description">
-                <p>Enable Draco decoding for gltf.</p>
-            </div>
-        
-    
-
-    
-
-    
-        <h4>Parameters</h4>
-        
-
-<ul class="params">
-    
-    <li>
-        <code>path</code>
-        
-        
-            &mdash; <span><p>to draco library folder.
-This library is mandatory to load b3dm with Draco compression.</p></span>
-        
-
-        
-    </li>
-    
-    <li>
-        <code>config</code>
-        
-        
-            &mdash; <span><p>optional configuration for Draco compression.</p>
-<p>The Draco library files are in folder itowns/examples/libs/draco/.
-You are obliged to indicate this path when you want enable the Draco Decoding.</p>
-<p>For more information on Draco, read file in /itowns/examples/libs/draco/README.md.</p></span>
-        
-
-        
-    </li>
-    
-</ul>
-
-    
-
-    
-        
-            <h4>Example</h4>
-            
-
-
-    
-        <caption>Enable draco decoder</caption>
-
-    
-
-    <pre class="prettyprint source lang-js"><code>// if you copied the folder from /itowns/examples/libs/draco/ to your root project,
-// You could set path with './'.
-itowns.enableDracoLoader('./');</code></pre>
-
-
-        
-    
-</div>
-
-            <hr/>
-        
-            
-
-<div class="method">
-    <h3>
         <span class="method-name">parse</span>
         (
 
@@ -218,8 +131,7 @@ itowns.enableDracoLoader('./');</code></pre>
     
     <li>
         <code>options.doNotPatchMaterial</code>
-        (default: <code>'false'</code>)
-        
+        (optional)
         
             &mdash; <span><p>disable patching material with logarithmic depth buffer support.</p></span>
         
@@ -239,11 +151,23 @@ itowns.enableDracoLoader('./');</code></pre>
     </li>
     
     <li>
+        <code>options.frustumCulled</code>
+        (optional)
+        
+            &mdash; <span><p>enable frustum culling.</p></span>
+        
+
+        
+    </li>
+    
+    <li>
         <code>options.overrideMaterials</code>
-        (default: <code>'false'</code>)
+        (optional)
         
-        
-            &mdash; <span><p>override b3dm's embedded glTF materials. If overrideMaterials is a three.js material, it will be the material used to override.</p></span>
+            &mdash; <span><p>override b3dm's embedded glTF materials. If
+true, a threejs <a href="https://threejs.org/docs/index.html?q=meshbasic#api/en/materials/MeshBasicMaterial">MeshBasicMaterial</a>
+is set up. config.overrideMaterials can also be a threejs <a href="https://threejs.org/docs/index.html?q=material#api/en/materials/Material">Material</a>
+in which case it will be the material used to override.</p></span>
         
 
         
@@ -275,8 +199,8 @@ itowns.enableDracoLoader('./');</code></pre>
 
         <hr class="title-divider"/>
         <h2>Source</h2>
-        <a target="_blank" href="https://github.com/itowns/itowns/blob/master/src/Parser/B3dmParser.js">
-            src/Parser/B3dmParser.js
+        <a target="_blank" href="https://github.com/itowns/itowns/blob/master/packages/Main/src/Parser/B3dmParser.js">
+            packages/Main/src/Parser/B3dmParser.js
         </a>
 
 

@@ -11,10 +11,10 @@
     <body>
         <div id="viewerDiv"></div>
         <script src="js/GUI/GuiTools.js"></script>
-        <script src="../dist/itowns.js"></script>
+        <script src="../packages/Main/dist/itowns.js"></script>
         <script src="js/GUI/LoadingScreen.js"></script>
         <script src="js/plugins/FeatureToolTip.js"></script>
-        <script src="../dist/debug.js"></script>
+        <script src="../packages/Main/dist/debug.js"></script>
         <script type="text/javascript">
             // Define initial camera position
             var placement = {
@@ -69,7 +69,7 @@
 
                 return view.addLayer(new itowns.ColorLayer('velib', {
                     source: velibSource,
-                    style: new itowns.Style({
+                    style: {
                         zoom: { min: 10, max: 20 },
                         point: { color: 'white', line: 'green' },
                         text: {
@@ -79,7 +79,7 @@
                             haloWidth: 1,
                             font: ['monospace'],
                         }
-                    }),
+                    },
                     addLabelLayer: true,
                 }));
             }).then((layer => {

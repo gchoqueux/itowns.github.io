@@ -24,8 +24,8 @@
 </div>
 <div id="viewerDiv"></div>
 
-<script src="../dist/itowns.js"></script>
-<script src="../dist/debug.js"></script>
+<script src="../packages/Main/dist/itowns.js"></script>
+<script src="../packages/Main/dist/debug.js"></script>
 <script src="js/GUI/LoadingScreen.js"></script>
 <script src="js/GUI/GuiTools.js"></script>
 <script type="text/javascript">
@@ -52,8 +52,8 @@
             new itowns.ElevationLayer(config.id, config),
         );
     }
-    itowns.Fetcher.json('./layers/JSONLayers/WORLD_DTM.json').then(addElevationLayerFromConfig);
     itowns.Fetcher.json('./layers/JSONLayers/IGN_MNT_HIGHRES.json').then(addElevationLayerFromConfig);
+    itowns.Fetcher.json('./layers/JSONLayers/WORLD_DTM.json').then(addElevationLayerFromConfig);
 
     const customControls = {
         // Disable pan movement

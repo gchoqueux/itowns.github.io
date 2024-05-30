@@ -11,8 +11,8 @@
     <body>
         <div id="viewerDiv" class="viewer"></div>
         <script src="js/GUI/GuiTools.js"></script>
-        <script src="../dist/itowns.js"></script>
-        <script src="../dist/debug.js"></script>
+        <script src="../packages/Main/dist/itowns.js"></script>
+        <script src="../packages/Main/dist/debug.js"></script>
         <script type="text/javascript">
             // Define initial camera position
             var placement = {
@@ -43,8 +43,8 @@
                 var layer = new itowns.ElevationLayer(config.id, config);
                 view.addLayer(layer).then(menuGlobe.addLayerGUI.bind(menuGlobe));
             }
-            itowns.Fetcher.json('./layers/JSONLayers/WORLD_DTM.json').then(addElevationLayerFromConfig);
             itowns.Fetcher.json('./layers/JSONLayers/IGN_MNT_HIGHRES.json').then(addElevationLayerFromConfig);
+            itowns.Fetcher.json('./layers/JSONLayers/WORLD_DTM.json').then(addElevationLayerFromConfig);
 
             // Add a geometry layer, which will contain the multipolygon to display
             var marne = new itowns.FeatureGeometryLayer('Marne', {
@@ -57,12 +57,12 @@
                 transparent: true,
                 opacity: 0.7,
                 zoom: { min: 10 },
-                style: new itowns.Style({
+                style: {
                     fill: {
                         color: new itowns.THREE.Color(0xbbffbb),
                         extrusion_height: 80,
                     }
-                })
+                }
             });
 
             view.addLayer(marne).then(function menu(layer) {

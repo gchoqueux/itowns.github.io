@@ -11,9 +11,9 @@
     <body>
         <div id="viewerDiv"></div>
         <script src="js/GUI/GuiTools.js"></script>
-        <script src="../dist/itowns.js"></script>
+        <script src="../packages/Main/dist/itowns.js"></script>
         <script src="js/GUI/LoadingScreen.js"></script>
-        <script src="../dist/debug.js"></script>
+        <script src="../packages/Main/dist/debug.js"></script>
         <script type="text/javascript">
             // Define initial camera position
             // Coordinate can be found on https://www.geoportail.gouv.fr/carte
@@ -50,8 +50,8 @@
                 var layer = new itowns.ElevationLayer(config.id, config);
                 view.addLayer(layer).then(menuGlobe.addLayerGUI.bind(menuGlobe));
             }
-            itowns.Fetcher.json('./layers/JSONLayers/WORLD_DTM.json').then(addElevationLayerFromConfig);
             itowns.Fetcher.json('./layers/JSONLayers/IGN_MNT_HIGHRES.json').then(addElevationLayerFromConfig);
+            itowns.Fetcher.json('./layers/JSONLayers/WORLD_DTM.json').then(addElevationLayerFromConfig);
 
             function addMeshToScene() {
                 // creation of the new mesh (a cylinder)

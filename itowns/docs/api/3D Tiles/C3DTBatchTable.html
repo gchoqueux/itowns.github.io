@@ -46,8 +46,11 @@ table</a>.</p></div>
         buffer:
             <span class="type">ArrayBuffer</span>, 
     
+        jsonLength:
+            <span class="type">number</span>, 
+    
         binaryLength:
-            <span class="type">ArrayBuffer</span>, 
+            <span class="type">number</span>, 
     
         batchLength:
             <span class="type">number</span>, 
@@ -72,9 +75,20 @@ table</a>.</p></div>
     
     <li>
         <code>buffer</code>
+        (default: <code>new ArrayBuffer()</code>)
         
         
-            &mdash; <span><p>batch table buffer to parse.</p></span>
+            &mdash; <span><p>batch table buffer to parse</p></span>
+        
+
+        
+    </li>
+    
+    <li>
+        <code>jsonLength</code>
+        (optional)
+        
+            &mdash; <span><p>batch table json part length</p></span>
         
 
         
@@ -82,10 +96,9 @@ table</a>.</p></div>
     
     <li>
         <code>binaryLength</code>
+        (optional)
         
-        
-            &mdash; <span><p>the length of the binary part of
-the batch table (not supported yet)</p></span>
+            &mdash; <span><p>batch table binary part length</p></span>
         
 
         
@@ -93,7 +106,7 @@ the batch table (not supported yet)</p></span>
     
     <li>
         <code>batchLength</code>
-        
+        (optional)
         
             &mdash; <span><p>the length of the batch.</p></span>
         
@@ -103,7 +116,7 @@ the batch table (not supported yet)</p></span>
     
     <li>
         <code>registeredExtensions</code>
-        
+        (optional)
         
             &mdash; <span><p>extensions registered to the layer</p></span>
         
@@ -297,8 +310,8 @@ extension2: {...}
 
         <hr class="title-divider"/>
         <h2>Source</h2>
-        <a target="_blank" href="https://github.com/itowns/itowns/blob/master/src/Core/3DTiles/C3DTBatchTable.js">
-            src/Core/3DTiles/C3DTBatchTable.js
+        <a target="_blank" href="https://github.com/itowns/itowns/blob/master/packages/Main/src/Core/3DTiles/C3DTBatchTable.js">
+            packages/Main/src/Core/3DTiles/C3DTBatchTable.js
         </a>
 
 

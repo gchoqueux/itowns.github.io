@@ -10,9 +10,9 @@
     </head>
     <body>
         <div id="viewerDiv" class="viewer"></div>
-        <script src="../dist/itowns.js"></script>
+        <script src="../packages/Main/dist/itowns.js"></script>
         <script src="js/GUI/LoadingScreen.js"></script>
-        <script src="../dist/debug.js"></script>
+        <script src="../packages/Main/dist/debug.js"></script>
         <script src="js/GUI/GuiTools.js"></script>
         <script src="js/3dTilesHelper.js"></script>
         <script type="text/javascript">
@@ -38,8 +38,8 @@
             // Add a WMS imagery source
             var wmsImagerySource = new itowns.WMSSource({
                 extent: extent,
-                name: 'Ortho2009_vue_ensemble_16cm_CC46',
-                url: 'https://download.data.grandlyon.com/wms/grandlyon',
+                name: 'ortho_latest',
+                url: 'https://imagerie.data.grandlyon.com/wms/grandlyon',
                 version: '1.3.0',
                 crs: 'EPSG:3946',
                 format: 'image/jpeg',
@@ -59,8 +59,8 @@
             // Add a WMS elevation source
             var wmsElevationSource = new itowns.WMSSource({
                 extent: extent,
-                url: 'https://download.data.grandlyon.com/wms/grandlyon',
-                name: 'MNT2012_Altitude_10m_CC46',
+                url: 'https://imagerie.data.grandlyon.com/wms/grandlyon',
+                name: 'MNT2018_Altitude_2m',
                 crs: 'EPSG:3946',
                 width: 256,
                 format: 'image/jpeg',
@@ -85,8 +85,8 @@
                 '3d-tiles-layer-building', {
                     name: 'Lyon-2015-building',
                     source: new itowns.C3DTilesSource({
-                        url:
-                            'http://rict.liris.cnrs.fr/DataStore/Lyon1er-2015/tileset.json',
+                        url: 'https://raw.githubusercontent.com/iTowns/iTowns2-sample-data/master/' +
+                            '3DTiles/lyon_1_3946_textured_draco/tileset.json',
                     }),
                 }, view);
 
@@ -114,7 +114,7 @@
             var menu = new GuiTools('menuDiv', view);
             var d = new debug.Debug(view, menu.gui);
             debug.createTileDebugUI(menu.gui, view, view.tileLayer, d);
-            debug.create3dTilesDebugUI(menu.gui, view, $3dTilesLayer, d);
+            debug.create3dTilesDebugUI(menu.gui, view, $3dTilesLayer);
         </script>
     </body>
 </html>

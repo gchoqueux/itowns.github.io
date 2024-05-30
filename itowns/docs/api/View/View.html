@@ -128,16 +128,26 @@ added to viewerDiv (mutually exclusive with mainLoop)</p></span>
         
 
         
+    </li>
+    
+    <li>
+        <code>options.webXR</code>
+        (optional)
+        
+            &mdash; <span><p>enable webxr button to switch on VR visualization.</p></span>
+        
+
+        
             
 
 <ul class="params">
     
     <li>
-        <code>options.renderer.isWebGL2</code>
-        (default: <code>true</code>)
+        <code>options.webXR.scale</code>
+        (default: <code>1.0</code>)
         
         
-            &mdash; <span><p>enable webgl 2.0 for THREE.js.</p></span>
+            &mdash; <span><p>apply webxr scale tranformation.</p></span>
         
 
         
@@ -164,6 +174,17 @@ added to viewerDiv (mutually exclusive with mainLoop)</p></span>
         
             &mdash; <span><p><a href="https://threejs.org/docs/?q=color#api/en/math/Color">THREE.Color</a> Diffuse color terrain material.
 This color is applied to terrain if there isn't color layer on terrain extent (by example on pole).</p></span>
+        
+
+        
+    </li>
+    
+    <li>
+        <code>options.enableFocusOnStart</code>
+        (default: <code>true</code>)
+        
+        
+            &mdash; <span><p>enable focus on dom element on start.</p></span>
         
 
         
@@ -205,20 +226,134 @@ var view = itowns.View('EPSG:4326', viewerDiv, { camera: { cameraThree: customCa
 
     <pre class="prettyprint source lang-js"><code>var viewerDiv = document.getElementById('viewerDiv');
 var view = itowns.View('EPSG:4326', viewerDiv, { camera: { type: itowns.CAMERA_TYPE.ORTHOGRAPHIC } });
-var customControls = itowns.THREE.OrbitControls(view.camera.camera3D, viewerDiv);</code></pre>
-
-    
-        <caption><b>Enable WebGl 1.0 instead of WebGl 2.0.</b></caption>
-
-    
-
-    <pre class="prettyprint source lang-js"><code>var viewerDiv = document.getElementById('viewerDiv');
-const extent = new Extent('EPSG:3946', 1837816.94334, 1847692.32501, 5170036.4587, 5178412.82698);
-var view = new itowns.View('EPSG:4326', viewerDiv, {  renderer: { isWebGL2: false } });</code></pre>
+var customControls = itowns.THREE.OrbitControls(view.camera3D, viewerDiv);</code></pre>
 
 
     
 
+    
+        <hr class="title-divider"/>
+        <h2>Properties</h2>
+        
+            
+
+<div class="property">
+    <h3>
+        <span class="property-name">domElement</span>
+        : <span class="type">HTMLElement</span>
+    </h3>
+
+    
+        <div class="description">
+            <p>Thhe domElement holding the canvas where the view is displayed</p>
+        </div>
+    
+</div>
+
+            <hr/>
+        
+            
+
+<div class="property">
+    <h3>
+        <span class="property-name">referenceCrs</span>
+        : <span class="type">String</span>
+    </h3>
+
+    
+        <div class="description">
+            <p>The coordinate reference system of the view</p>
+        </div>
+    
+</div>
+
+            <hr/>
+        
+            
+
+<div class="property">
+    <h3>
+        <span class="property-name">mainLoop</span>
+        : <span class="type">MainLoop</span>
+    </h3>
+
+    
+        <div class="description">
+            <p>itowns mainloop scheduling the operations</p>
+        </div>
+    
+</div>
+
+            <hr/>
+        
+            
+
+<div class="property">
+    <h3>
+        <span class="property-name">scene</span>
+        : <span class="type">THREE.Scene</span>
+    </h3>
+
+    
+        <div class="description">
+            <p>threejs scene of the view</p>
+        </div>
+    
+</div>
+
+            <hr/>
+        
+            
+
+<div class="property">
+    <h3>
+        <span class="property-name">camera</span>
+        : <span class="type"><a onclick="window.parent.goTo('api/Renderer/Camera.html','api/Renderer/Camera')" title="Camera">Camera</a></span>
+    </h3>
+
+    
+        <div class="description">
+            <p>itowns camera (that holds a threejs camera that is directly accessible with View.camera3D)</p>
+        </div>
+    
+</div>
+
+            <hr/>
+        
+            
+
+<div class="property">
+    <h3>
+        <span class="property-name">camera3D</span>
+        : <span class="type">THREE.Camera</span>
+    </h3>
+
+    
+        <div class="description">
+            <p>threejs camera that is stored in itowns camera</p>
+        </div>
+    
+</div>
+
+            <hr/>
+        
+            
+
+<div class="property">
+    <h3>
+        <span class="property-name">renderer</span>
+        : <span class="type">THREE.WebGLRenderer</span>
+    </h3>
+
+    
+        <div class="description">
+            <p>threejs webglrenderer rendering this view</p>
+        </div>
+    
+</div>
+
+            
+        
     
 
     
@@ -386,6 +521,12 @@ the layer is done. This promise is also returned by
         (
 
 
+    
+    
+        clearCache:
+            <span class="type">boolean</span>
+    
+
 )
         
     </h3>
@@ -406,6 +547,24 @@ the layer is done. This promise is also returned by
     
 
     
+
+    
+        <h4>Parameters</h4>
+        
+
+<ul class="params">
+    
+    <li>
+        <code>clearCache</code>
+        (optional)
+        
+            &mdash; <span><p>Whether to clear all the caches or not (layers cache, style cache, tilesCache)</p></span>
+        
+
+        
+    </li>
+    
+</ul>
 
     
 
@@ -1002,7 +1161,7 @@ projected distance at. By default, this is the middle of the screen.</p></span>
     
         
             <div class="description">
-                <p>Returns the world position (view's crs: referenceCrs) under view coordinates.
+                <p>Returns the world position on the terrain (view's crs: referenceCrs) under view coordinates.
 This position is computed with depth buffer.</p>
             </div>
         
@@ -1011,7 +1170,7 @@ This position is computed with depth buffer.</p>
     
                 <h4>Returns</h4>
                 
-                    <p>the world position in view's crs: referenceCrs.</p>
+                    <p>the world position on the terrain in view's crs: referenceCrs.</p>
                 
 
     
@@ -1335,6 +1494,87 @@ non-interactive events (e.g: texture loaded)</p>
 
 <div class="method">
     <h3>
+        <span class="method-name">pickCoordinates</span>
+        (
+
+
+    
+    
+        mouse:
+            <span class="type">THREE.Vector2|event</span>, 
+    
+        target:
+            <span class="type"><a onclick="window.parent.goTo('api/Geographic/Coordinates.html','api/Geographic/Coordinates')" title="Coordinates">Coordinates</a></span>
+    
+
+)
+        :
+            
+                <span class="type"><a onclick="window.parent.goTo('api/Geographic/Coordinates.html','api/Geographic/Coordinates')" title="Coordinates">Coordinates</a></span>
+
+            
+        
+    </h3>
+
+    
+        
+            <div class="description">
+                <p>Returns the world <a onclick="window.parent.goTo('api/Geographic/Coordinates.html','api/Geographic/Coordinates')" title="Coordinates">Coordinates</a> of the terrain at given view coordinates.</p>
+            </div>
+        
+    
+
+    
+                <h4>Returns</h4>
+                
+                    <p>The world <a onclick="window.parent.goTo('api/Geographic/Coordinates.html','api/Geographic/Coordinates')" title="Coordinates">Coordinates</a> of the terrain at the given view coordinates.</p>
+                
+
+    
+        <h4>Parameters</h4>
+        
+
+<ul class="params">
+    
+    <li>
+        <code>mouse</code>
+        (optional)
+        
+            &mdash; <span><p>The view coordinates at which the world coordinates must be
+returned. This parameter can also be set to a mouse event from
+which the view coordinates will be deducted. If not specified, it
+will be defaulted to the view's center coordinates.</p></span>
+        
+
+        
+    </li>
+    
+    <li>
+        <code>target</code>
+        (optional)
+        
+            &mdash; <span><p>The result will be copied into this <a onclick="window.parent.goTo('api/Geographic/Coordinates.html','api/Geographic/Coordinates')" title="Coordinates">Coordinates</a>. If not
+specified, a new <a onclick="window.parent.goTo('api/Geographic/Coordinates.html','api/Geographic/Coordinates')" title="Coordinates">Coordinates</a> instance will be created.</p></span>
+        
+
+        
+    </li>
+    
+</ul>
+
+    
+
+    
+        
+    
+</div>
+
+            <hr/>
+        
+            
+
+<div class="method">
+    <h3>
         <span class="method-name">pickFeaturesAt</span>
         (
 
@@ -1363,8 +1603,9 @@ non-interactive events (e.g: texture loaded)</p>
     
         
             <div class="description">
-                <p>Searches for <a onclick="window.parent.goTo('api/Base/Feature.html','api/Base/Feature')" title="Feature">Feature</a> in <a onclick="window.parent.goTo('api/Layer/ColorLayer.html','api/Layer/ColorLayer')" title="ColorLayer">ColorLayer</a>, under the mouse of at
-a specified coordinates, in this view.</p>
+                <p>Searches for <a onclick="window.parent.goTo('api/Base/FeatureGeometry.html','api/Base/FeatureGeometry')" title="FeatureGeometry">FeatureGeometry</a> in <a onclick="window.parent.goTo('api/Layer/ColorLayer.html','api/Layer/ColorLayer')" title="ColorLayer">ColorLayer</a>, under the mouse or at
+the specified coordinates, in this view. Combining them per layer and in a Feature
+like format.</p>
             </div>
         
     
@@ -1373,10 +1614,15 @@ a specified coordinates, in this view.</p>
                 <h4>Returns</h4>
                 
                     <ul>
-<li>An object, with a property per layer. For example,
-looking for features on layers <code>wfsBuilding</code> and <code>wfsRoads</code> will give an
-object like <code>{ wfsBuilding: [...], wfsRoads: [] }</code>. Each property is made
-of an array, that can be empty or filled with found features.</li>
+<li>An object, having one property per layer.
+For example, looking for features on layers <code>wfsBuilding</code> and <code>wfsRoads</code>
+will give an object like <code>{ wfsBuilding: [...], wfsRoads: [] }</code>.
+Each property is made of an array, that can be empty or filled with
+Feature like objects composed of:</li>
+<li>the FeatureGeometry</li>
+<li>the feature type</li>
+<li>the style</li>
+<li>the coordinate if the FeatureGeometry is a point</li>
 </ul>
                 
 
@@ -1461,7 +1707,7 @@ view.pickFeaturesAt({ x, y }, 3, 'wfsBuilding', myLayer);</code></pre>
             <span class="type">number</span>, 
     
         where:
-            <span class="type"><a onclick="window.parent.goTo('api/Layer/GeometryLayer.html','api/Layer/GeometryLayer')" title="GeometryLayer">GeometryLayer</a>|string|Object3D</span>
+            <span class="type"><a onclick="window.parent.goTo('api/Layer/GeometryLayer.html','api/Layer/GeometryLayer')" title="GeometryLayer">GeometryLayer</a>|string|Object3D|Array.&lt;(<a href="api/Layer/GeometryLayer.html">GeometryLayer</a>|string|Object3D)></span>
     
 
 )
@@ -1527,9 +1773,8 @@ on mouseOrEvt. This is the radius of this circle, in pixels.</p></span>
         (optional)
         
             &mdash; <span><p>Where to look for
-objects. It can be anything of <a onclick="window.parent.goTo('api/Layer/GeometryLayer.html','api/Layer/GeometryLayer')" title="GeometryLayer">GeometryLayer</a>, IDs of layers, or
-<code>THREE.Object3D</code>. If no location is specified, it will query on all
-<a onclick="window.parent.goTo('api/Layer/GeometryLayer.html','api/Layer/GeometryLayer')" title="GeometryLayer">GeometryLayer</a> present in this <code>View</code>.</p></span>
+objects. It can be a single <a onclick="window.parent.goTo('api/Layer/GeometryLayer.html','api/Layer/GeometryLayer')" title="GeometryLayer">GeometryLayer</a>, <code>THREE.Object3D</code>, ID of a layer or an array of one of these or
+of a mix of these. If no location is specified, it will query on all <a onclick="window.parent.goTo('api/Layer/GeometryLayer.html','api/Layer/GeometryLayer')" title="GeometryLayer">GeometryLayer</a> present in this <code>View</code>.</p></span>
         
 
         
@@ -1552,6 +1797,88 @@ view.pickObjectsAt({ x, y }, 1, 'wfsBuilding')
 view.pickObjectsAt({ x, y }, 3, 'wfsBuilding', myLayer)</code></pre>
 
 
+        
+    
+</div>
+
+            <hr/>
+        
+            
+
+<div class="method">
+    <h3>
+        <span class="method-name">pickTerrainCoordinates</span>
+        (
+
+
+    
+    
+        mouse:
+            <span class="type">THREE.Vector2|event</span>, 
+    
+        target:
+            <span class="type"><a onclick="window.parent.goTo('api/Geographic/Coordinates.html','api/Geographic/Coordinates')" title="Coordinates">Coordinates</a></span>
+    
+
+)
+        :
+            
+                <span class="type"><a onclick="window.parent.goTo('api/Geographic/Coordinates.html','api/Geographic/Coordinates')" title="Coordinates">Coordinates</a></span>
+
+            
+        
+    </h3>
+
+    
+        
+            <div class="description">
+                <p>Returns the world <a onclick="window.parent.goTo('api/Geographic/Coordinates.html','api/Geographic/Coordinates')" title="Coordinates">Coordinates</a> of the terrain at given view coordinates.</p>
+            </div>
+        
+    
+
+    
+                <h4>Returns</h4>
+                
+                    <p>The world <a onclick="window.parent.goTo('api/Geographic/Coordinates.html','api/Geographic/Coordinates')" title="Coordinates">Coordinates</a> of the terrain at the given view coordinates in the
+coordinate reference system of the target or in the view referenceCrs if no target is specified.</p>
+                
+
+    
+        <h4>Parameters</h4>
+        
+
+<ul class="params">
+    
+    <li>
+        <code>mouse</code>
+        (optional)
+        
+            &mdash; <span><p>The view coordinates at which the world coordinates must be returned. This
+parameter can also be set to a mouse event from which the view coordinates will be deducted. If not specified,
+it will be defaulted to the view's center coordinates.</p></span>
+        
+
+        
+    </li>
+    
+    <li>
+        <code>target</code>
+        (optional)
+        
+            &mdash; <span><p>The result will be copied into this <a onclick="window.parent.goTo('api/Geographic/Coordinates.html','api/Geographic/Coordinates')" title="Coordinates">Coordinates</a> in the coordinate reference
+system of the given coordinate. If not specified, a new <a onclick="window.parent.goTo('api/Geographic/Coordinates.html','api/Geographic/Coordinates')" title="Coordinates">Coordinates</a> instance will be created (in the
+view referenceCrs).</p></span>
+        
+
+        
+    </li>
+    
+</ul>
+
+    
+
+    
         
     
 </div>
@@ -1700,7 +2027,10 @@ MAIN_LOOP_EVENTS.</p></span>
     
     
         layerId:
-            <span class="type">string</span>
+            <span class="type">string</span>, 
+    
+        clearCache:
+            <span class="type">boolean</span>
     
 
 )
@@ -1733,6 +2063,16 @@ MAIN_LOOP_EVENTS.</p></span>
         
         
             &mdash; <span><p>The identifier</p></span>
+        
+
+        
+    </li>
+    
+    <li>
+        <code>clearCache</code>
+        (optional)
+        
+            &mdash; <span><p>Whether to clear all the layer cache or not</p></span>
         
 
         
@@ -2004,8 +2344,8 @@ layers are ready.</p>
 
         <hr class="title-divider"/>
         <h2>Source</h2>
-        <a target="_blank" href="https://github.com/itowns/itowns/blob/master/src/Core/View.js">
-            src/Core/View.js
+        <a target="_blank" href="https://github.com/itowns/itowns/blob/master/packages/Main/src/Core/View.js">
+            packages/Main/src/Core/View.js
         </a>
 
 
