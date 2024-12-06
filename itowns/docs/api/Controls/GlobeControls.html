@@ -123,7 +123,7 @@ can be passed in this object.</p></span>
     
         <div class="description">
             <p>The factor the scale is multiplied by when dollying (zooming) in or
-divided by when dollying out. Default is 2.</p>
+divided by when dollying out. Default is 1.1.</p>
         </div>
     
 </div>
@@ -352,6 +352,24 @@ operator introduces while operating a heavy physical camera). Default is true.</
     
         <div class="description">
             <p>the damping move factor. Default is 0.25.</p>
+        </div>
+    
+</div>
+
+            <hr/>
+        
+            
+
+<div class="property">
+    <h3>
+        <span class="property-name">stateControl</span>
+        : <span class="type">StateControl~State</span>
+    </h3>
+
+    
+        <div class="description">
+            <p>redefining which controls state is triggered by the keyboard/mouse
+event (For example, rewrite the PAN movement to be triggered with the 'left' mouseButton instead of 'right').</p>
         </div>
     
 </div>
@@ -2086,8 +2104,8 @@ The zoom is always in the [getMinZoom(), getMaxZoom()] range.</p>
 
         <hr class="title-divider"/>
         <h2>Source</h2>
-        <a target="_blank" href="https://github.com/itowns/itowns/blob/master/src/Controls/GlobeControls.js">
-            src/Controls/GlobeControls.js
+        <a target="_blank" href="https://github.com/itowns/itowns/blob/master/packages/Main/src/Controls/GlobeControls.js">
+            packages/Main/src/Controls/GlobeControls.js
         </a>
 
 
